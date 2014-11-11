@@ -28,6 +28,7 @@ let main _ =
 
         Planet.create width height
 
+    ///The commands to be processed
     let commands = 
         let rec parse lines = 
             match lines with
@@ -39,6 +40,7 @@ let main _ =
             |> Array.toList
             |> parse
 
+    ///The final state of the planet
     let planet = 
 
         //Parse the rover string and make touchdown on a planet
