@@ -9,6 +9,7 @@ type Direction =
     | South = 2
     | West = 3
 
+[<RequireQualifiedAccess>]
 module Location = 
 
     type Point = {
@@ -45,6 +46,7 @@ module Location =
     ///Convert to an X, Y tuple representation
     let toTuple = apply (fun point -> (point.X, point.Y))
 
+[<RequireQualifiedAccess>]
 module Orientation = 
 
     type Instance = Orientation of Direction
@@ -99,6 +101,7 @@ module Orientation =
         | Direction.West -> "West"
     )
 
+[<RequireQualifiedAccess>]
 module Rover = 
 
     type State = {
@@ -173,6 +176,7 @@ module Rover =
         sprintf "%s | %s | Facing %s" state.Name location orientation
     )
 
+[<RequireQualifiedAccess>]
 module Planet = 
 
     type State = {
@@ -205,8 +209,10 @@ module Planet =
         in String.Join (Environment.NewLine, rovers)
     )
 
+    [<RequireQualifiedAccess>]
     module MissionControl = 
 
+        [<RequireQualifiedAccess>]
         module private Rovers = 
 
             ///Find a rover by name
@@ -246,6 +252,7 @@ module Planet =
                 fun (state, rover) ->
                     return' (state, (f rover))
 
+        [<RequireQualifiedAccess>]
         module private State = 
 
             ///Ensure a rover is within bounds
