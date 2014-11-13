@@ -156,7 +156,7 @@ module Rover =
     )
 
     ///Turn the rover using f
-    let turn f = mutate (fun state ->
+    let private turn f = mutate (fun state ->
         let orientation = (f state.Orientation)
         in { state with Orientation = orientation; }
     )
