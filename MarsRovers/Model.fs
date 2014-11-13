@@ -292,14 +292,18 @@ module Planet =
             let toPlanet state = 
                 return' (Planet state)
 
+        ///Validate a rover and add it to the planet
+        let private validatedAdd = 
+            State.checkBounds
+            --> State.checkCollisions
+            --> Rovers.add
+            --> State.toPlanet
+
         ///Touch a rover down on the planet surface
         let touchdown rover (Planet state) = 
             let f =
                 return'
-                --> State.checkBounds
-                --> State.checkCollisions
-                --> Rovers.add
-                --> State.toPlanet
+                --> validatedAdd
             in f (state, rover)
         
         ///Send an instruction to the rover
@@ -309,8 +313,5 @@ module Planet =
                 --> Rovers.find
                 --> Rovers.extract
                 --> Rovers.update instruction
-                --> State.checkBounds
-                --> State.checkCollisions
-                --> Rovers.add
-                --> State.toPlanet
+                --> validatedAdd
             in f (state, name)
