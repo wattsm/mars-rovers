@@ -301,16 +301,12 @@ module Planet =
 
         ///Touch a rover down on the planet surface
         let touchdown rover (Planet state) = 
-            let f =
-                return'
-                --> validatedAdd
-            in f (state, rover)
-        
+            validatedAdd (state, rover)
+
         ///Send an instruction to the rover
         let instruct name instruction (Planet state) = 
             let f = 
-                return'
-                --> Rovers.find
+                Rovers.find
                 --> Rovers.extract
                 --> Rovers.update instruction
                 --> validatedAdd
